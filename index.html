@@ -49,7 +49,7 @@
         </section>
     </main>
 
-   <script>
+    <script>
     var music = document.getElementById("bg-music");
     var container = document.querySelector(".music-container");
     var hasStarted = false;
@@ -57,29 +57,27 @@
     function startVibe() {
         if (!hasStarted) {
             hasStarted = true;
-            // We set volume to a solid 0.7 so it's clear but not peaking
+            // Set volume to 0.7 so it's clear but not peaking
             music.volume = 0.7; 
             
             music.play().then(() => {
                 container.classList.add("playing");
             }).catch(e => {
-                // If it fails, we reset so the next click tries again
+                // If it fails, reset so the next click tries again
                 hasStarted = false; 
-                console.log("Interaction needed");
+                console.log("Interaction still needed by browser");
             });
             
-            // Remove listeners so we don't trigger this 100 times
-            ["scroll", "mousemove", "mousedown", "keydown"].forEach(event => {
+            // Clean up ONLY the active listeners
+            ["mousedown", "keydown"].forEach(event => {
                 window.removeEventListener(event, startVibe);
             });
         }
     }
 
-    // Standard listeners[cite: 7]
-    window.addEventListener('scroll', startVibe);
-    window.addEventListener('mousemove', startVibe);
+    // High-intent listeners to bypass browser autoplay blocks
     window.addEventListener('mousedown', startVibe);
     window.addEventListener('keydown', startVibe);
-</script>
+    </script>
 </body>
 </html>
