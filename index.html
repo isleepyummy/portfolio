@@ -13,7 +13,7 @@
 <body>
     <!-- Hidden Audio for "Prime Time" Reveal -->
     <audio id="bg-music" loop>
-        <source src="primetime.wav" type="audio/mpeg">
+        <source src="primetime.wav" type="audio/wav">
     </audio>
 
     <nav>
@@ -63,19 +63,25 @@
             music.play().then(() => {
                 container.classList.add("playing");
             }).catch(e => {
-                // If it fails, reset so the next click tries again
                 hasStarted = false; 
                 console.log("Interaction still needed by browser");
             });
             
-            // Clean up ONLY the active listeners
             ["mousedown", "keydown"].forEach(event => {
                 window.removeEventListener(event, startVibe);
             });
         }
     }
 
-    // High-intent listeners to bypass browser autoplay blocks
+    // Seamless loop logic: jump back 0.1s before the actual end
+    music.addEventListener('timeupdate', function() {
+        if (this.currentTime > this.duration - 0.1) {
+            this.currentTime = 0;
+            this.play();
+        }
+    });
+
+    // High-intent listeners
     window.addEventListener('mousedown', startVibe);
     window.addEventListener('keydown', startVibe);
     </script>
