@@ -57,7 +57,7 @@
     function startVibe() {
         if (!hasStarted) {
             hasStarted = true;
-            // Set volume to 0.25 so it's clear but not peaking
+            // Volume set to 0.25 as requested
             music.volume = 0.25; 
             
             music.play().then(() => {
@@ -73,9 +73,10 @@
         }
     }
 
-    // Seamless loop logic: jump back 0.1s before the actual end
+    // High-precision loop logic for 120 BPM
     music.addEventListener('timeupdate', function() {
-        if (this.currentTime > this.duration - 0.1) {
+        // Jumping back 0.0625s (one 32nd note) to skip any browser-added silence
+        if (this.currentTime > this.duration - 0.0625) {
             this.currentTime = 0;
             this.play();
         }
