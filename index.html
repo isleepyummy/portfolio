@@ -13,7 +13,7 @@
 <body>
     <!-- Hidden Audio for "Prime Time" Reveal -->
     <audio id="bg-music" loop>
-        <source src="prime time.mp3" type="audio/mpeg">
+        <source src="primetime.mp3" type="audio/mpeg">
     </audio>
 
     <nav>
@@ -27,7 +27,7 @@
             <div class="wave-bar"></div>
             <div class="wave-bar"></div>
             <div class="wave-bar"></div>
-            <span id="music-text">PRIME TIME!</span>
+            <span id="music-text">PRIME TIME</span>
         </div>
     </nav>
 
@@ -56,7 +56,7 @@
 
         function startVibe() {
             if (!hasStarted) {
-                music.volume = 0; 
+                music.volume = 1; 
                 music.play().catch(e => console.log("Waiting for more interaction..."));
                 hasStarted = true;
                 container.classList.add("playing");
