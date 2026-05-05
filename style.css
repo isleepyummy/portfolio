@@ -6,25 +6,65 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #1a1a1a;
     line-height: 1.6;
-    animation: fadeIn 1.5s ease-in;
+    animation: fadeIn 1.5s ease-in;[cite: 1]
 }
 
-/* Navigation */
+/* Navigation & Music Wave */
 nav {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
     background: white;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 0.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: bold; }
+
+.music-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-left: 1px solid #ddd;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+.music-container.playing { opacity: 1; }
+
+.wave-bar {
+    width: 3px;
+    height: 12px;
+    background-color: #D4AF37; /* Conductor Gold */
+    margin-right: 3px;
+}
+
+#music-text {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #D4AF37;
+}
+
+/* Animation for Wave Bars */
+.playing .wave-bar {
+    animation: wave 1s infinite ease-in-out;
+}
+.playing .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+.playing .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 100% { height: 8px; }
+    50% { height: 18px; }
+}
 
 /* Hero Section */
 .hero {
     height: 80vh;
-    /* This uses the image you upload to GitHub[cite: 3] */
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg');
     background-size: cover;
     background-position: center;
@@ -39,7 +79,7 @@ nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: bold; }
 .hero h1 {
     font-size: 5rem;
     letter-spacing: 15px;
-    color: #D4AF37; /* Gold like Mr. Velez's site[cite: 3] */
+    color: #D4AF37; 
     text-transform: uppercase;
     margin-bottom: 0;
 }
@@ -61,11 +101,8 @@ nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: bold; }
     transition: transform 0.3s ease;[cite: 1]
 }
 
-.card:hover { 
-    transform: translateY(-5px);[cite: 1]
-}
+.card:hover { transform: translateY(-5px); }[cite: 1]
 
-/* Buttons */
 .btn {
     display: inline-block;
     margin-top: 15px;
